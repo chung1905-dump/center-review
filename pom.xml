@@ -15,7 +15,7 @@
     <description>Review trung tam tieng anh</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>14</java.version>
         <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
     </properties>
 
@@ -102,6 +102,20 @@
             <groupId>org.javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.27.0-GA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.4</version>
         </dependency>
 
     </dependencies>

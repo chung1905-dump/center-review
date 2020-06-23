@@ -1,8 +1,25 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-    <title layout:fragment="title">Default Title</title>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <link rel="stylesheet" th:href="@{/general/css/main.css}">
 </head>
-<body layout:fragment="body">
-<h1>Default BODY</h1>
+
+<body th:fragment="body">
+<header th:fragment="header">
+    <nav class="navbar">
+        <h1 class="logo-header">
+            <a th:href="@{/}">(RVTT)</a>|
+        </h1>
+        <a th:href="'#'">New</a> |
+        <a th:href="@{/center/add}">Submit Center</a>
+    </nav>
+</header>
+<div th:fragment="messages" class="message">
+    <!--/*@thymesVar id="errs" type="java.util.Set<String>"*/-->
+    <div th:if="${errs?.size() > 0}">
+        <div th:each="err: ${errs}">
+            <span th:text="${err}"></span>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,0 +1,15 @@
+header {
+    background-color: #678d58;
+}
+
+body {
+    width: 80%;
+    margin: 0 10%;
+    background-color: #fceee9;
+}
+
+.logo-header {
+    padding: 10px;
+    display: inline;
+}
+

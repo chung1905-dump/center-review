@@ -5,19 +5,25 @@ import com.reviewtrungtam.webapp.center.service.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RequestMapping
 public class CenterController {
-    @Autowired
-    private CenterService centerService;
+    private final CenterService centerService;
 
-    @GetMapping(path = "/center/list")
+
+    @Autowired
+    public CenterController(CenterService centerService) {
+        this.centerService = centerService;
+    }
+
+    @GetMapping(path = "/")
     public String list(Model model) {
         List<Center> list = centerService.getAll();
         model.addAttribute("size", list.size());
@@ -35,8 +41,25 @@ public class CenterController {
     }
 
 
-    @GetMapping(path = "/center/new")
-    public String add(Model model) {
-        return "views/center/center-new.html";
+    @GetMapping(path = "/center/add")
+    public String add() {
+        return "views/center/center-add.html";
+    }
+
+    @PostMapping(path = "/center/add")
+    public RedirectView addPost(@RequestParam("logo-image") MultipartFile file, Center center, RedirectAttributes redirectAttributes) {
+        Set<String> errMsgs = new HashSet<>();
+        try {
+            centerService.preSave(center, file, errMsgs);
+            if (errMsgs.size() > 0) {
+                throw new Exception();
+            }
+            centerService.save(center);
+        } catch (Exception e) {
+            errMsgs.add("Error while submitting center");
+            redirectAttributes.addFlashAttribute("errs", errMsgs);
+            return new RedirectView("/center/add");
+        }
+        return new RedirectView("/");
     }
 }
