@@ -1,7 +1,7 @@
 package com.reviewtrungtam.webapp;
 
-import com.reviewtrungtam.webapp.storage.StorageProperties;
-import com.reviewtrungtam.webapp.storage.StorageService;
+import com.reviewtrungtam.webapp.general.storage.StorageProperties;
+import com.reviewtrungtam.webapp.general.storage.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

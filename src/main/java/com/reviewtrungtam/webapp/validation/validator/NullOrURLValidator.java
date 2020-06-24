@@ -1,12 +1,13 @@
 package com.reviewtrungtam.webapp.validation.validator;
 
 import com.reviewtrungtam.webapp.validation.constraints.NullOrURL;
-import org.hibernate.validator.internal.constraintvalidators.hv.URLValidator;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import java.net.MalformedURLException;
 
 public class NullOrURLValidator implements ConstraintValidator<NullOrURL, String> {
+
     @Override
     public void initialize(NullOrURL constraintAnnotation) {
 
@@ -14,7 +15,13 @@ public class NullOrURLValidator implements ConstraintValidator<NullOrURL, String
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        URLValidator urlValidator = new URLValidator();
-        return s == null || urlValidator.isValid(s, constraintValidatorContext);
+        if (s != null && s.length() != 0) {
+            try {
+                java.net.URL url = new java.net.URL(s);
+            } catch (MalformedURLException var5) {
+                return false;
+            }
+        }
+        return true;
     }
 }

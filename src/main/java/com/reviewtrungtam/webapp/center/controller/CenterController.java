@@ -32,11 +32,10 @@ public class CenterController {
     }
 
 
-    @GetMapping(path = "/center/view/{id}")
-    public String view(@PathVariable(name = "id") int id, Model model) {
-        Center entity = new Center();
-        model.addAttribute("article", entity);
-
+    @GetMapping(path = "/center/view/{slug}")
+    public String view(@PathVariable(name = "slug") String slug, Model model) {
+        Center center = centerService.findBySlug(slug);
+        model.addAttribute("center", center);
         return "views/center/center-view.html";
     }
 

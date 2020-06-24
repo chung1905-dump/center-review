@@ -1,4 +1,4 @@
-package com.reviewtrungtam.webapp.storage;
+package com.reviewtrungtam.webapp.general.storage;
 
 public class StorageFileNotFoundException extends StorageException {
 

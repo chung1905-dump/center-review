@@ -14,6 +14,7 @@ public class Center {
     @NotNull
     private String name;
 
+    @Column(unique = true)
     private String slugName;
 
     private int point;
@@ -33,9 +34,12 @@ public class Center {
 
     private String address;
 
+    @Column(unique = true)
     private String logo;
 
     private String photo;
+
+    private boolean isActive;
 
     public int getId() {
         return id;
@@ -131,5 +135,13 @@ public class Center {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

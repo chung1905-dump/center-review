@@ -1,8 +1,31 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorator="views/general/layout.html">
-<body layout:fragment="body">
-<div>
-    <p>Actual page content</p>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="'Submit center'"></title>
+    <link rel="stylesheet" th:href="@{/center/css/center-edit.css}">
+    <th:block th:insert="views/general/layout :: head"></th:block>
+</head>
+
+<body>
+<div class="main-container">
+    <div th:replace="views/general/layout :: header"></div>
+    <div th:replace="views/general/layout :: messages"></div>
+    <div class="center-detail" th:unless="${center == null}">
+        <table>
+            <tbody>
+            <tr>
+                <td><span th:text="'Logo'"></span></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><span th:text="'Name'"></span></td>
+                <td><span th:text="${center.name}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="center-detail" th:if="${center == null}">
+        <h1 th:text="'Not found'"></h1>
+    </div>
 </div>
 </body>
 </html>

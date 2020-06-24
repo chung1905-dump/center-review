@@ -1,4 +1,4 @@
-package com.reviewtrungtam.webapp.storage;
+package com.reviewtrungtam.webapp.general.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

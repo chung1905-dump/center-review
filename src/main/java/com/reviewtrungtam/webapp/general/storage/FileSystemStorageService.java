@@ -1,4 +1,4 @@
-package com.reviewtrungtam.webapp.storage;
+package com.reviewtrungtam.webapp.general.storage;
 
 import java.io.IOException;
 import java.io.InputStream;

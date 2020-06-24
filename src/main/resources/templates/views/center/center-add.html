@@ -10,7 +10,7 @@
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
     <div class="form">
-        <form th:action="@{/center/add}" method="POST" enctype="multipart/form-data">
+        <form accept-charset="UTF-8" th:action="@{/center/add}" method="POST" enctype="multipart/form-data">
             <h2>Add new center</h2>
             <fieldset>
                 <legend th:text="'Center Detail'"></legend>
