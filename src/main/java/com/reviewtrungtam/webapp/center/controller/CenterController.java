@@ -2,6 +2,7 @@ package com.reviewtrungtam.webapp.center.controller;
 
 import com.reviewtrungtam.webapp.center.entity.Center;
 import com.reviewtrungtam.webapp.center.service.CenterService;
+import com.reviewtrungtam.webapp.general.exception.AppException;
 import com.reviewtrungtam.webapp.review.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,10 +35,8 @@ public class CenterController {
 
     @GetMapping(path = "/center/view/{slug}")
     public String view(@PathVariable(name = "slug") String slug, Model model) {
-        Center center = centerService.findBySlug(slug);
+        Center center = centerService.findActiveBySlug(slug);
         model.addAttribute("center", center);
-        Review review = new Review();
-        model.addAttribute("review", review);
 
         return "views/center/layout/center-view.html";
     }
@@ -56,11 +55,12 @@ public class CenterController {
     public RedirectView addPost(@RequestParam("logo-image") MultipartFile file, Center center, RedirectAttributes redirectAttributes) {
         Set<String> errMsgs = new HashSet<>();
         try {
-            centerService.preSave(center, file, errMsgs);
-            if (errMsgs.size() > 0) {
-                throw new Exception();
-            }
+            centerService.preSave(center, file);
             centerService.save(center);
+        } catch (AppException e) {
+            errMsgs.addAll(e.getMessages());
+            redirectAttributes.addFlashAttribute("errs", errMsgs);
+            return new RedirectView("/center/add");
         } catch (Exception e) {
             errMsgs.add("Error while submitting center");
             redirectAttributes.addFlashAttribute("errs", errMsgs);

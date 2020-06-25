@@ -3,7 +3,7 @@
 <!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
 <div class="form" th:fragment="reviewForm(center)" th:if="${center != null}">
     <form accept-charset="UTF-8" th:action="@{/center/review}" method="POST" enctype="multipart/form-data">
-        <input type="hidden" readonly name="center" th:value="${center.id}">
+        <input type="hidden" readonly name="center-id" th:value="${center.id}">
         <fieldset>
             <legend th:text="'Review'"></legend>
             <table>

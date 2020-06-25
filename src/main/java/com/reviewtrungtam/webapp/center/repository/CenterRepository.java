@@ -12,4 +12,6 @@ public interface CenterRepository extends CrudRepository<Center, Integer> {
     List<Center> findAll();
 
     Center findBySlugNameAndStatus(String slugName, int status);
+
+    Center findByIdAndStatus(int id, int status);
 }

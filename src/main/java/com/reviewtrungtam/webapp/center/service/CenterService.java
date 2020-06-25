@@ -3,6 +3,7 @@ package com.reviewtrungtam.webapp.center.service;
 import com.reviewtrungtam.webapp.center.entity.Center;
 import com.reviewtrungtam.webapp.center.repository.CenterRepository;
 import com.reviewtrungtam.webapp.general.config.Status;
+import com.reviewtrungtam.webapp.general.exception.AppException;
 import com.reviewtrungtam.webapp.general.slugify.SlugifyService;
 import com.reviewtrungtam.webapp.general.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,41 +40,45 @@ public class CenterService {
         return centerRepository.save(entity);
     }
 
-    public Center findBySlug(String slug) {
+    public Center findActiveBySlug(String slug) {
         return centerRepository.findBySlugNameAndStatus(slug, Status.ACTIVE);
+    }
+
+    public Center findActiveById(int id) {
+        return centerRepository.findByIdAndStatus(id, Status.ACTIVE);
     }
 
     public List<Center> getAll() {
         return centerRepository.findAll();
     }
 
-    public void preSave(Center center, MultipartFile logo, Set<String> errMsgs) {
+    public void preSave(Center center, MultipartFile logo) throws AppException {
         center.setStatus(center.getDefaultStatus());
-        errMsgs.addAll(validateEntity(center));
-        center.setLogo(saveLogo(logo, errMsgs));
+        validateEntity(center);
+        center.setLogo(saveLogo(logo));
     }
 
-    private Set<String> validateEntity(Center center) {
+    private void validateEntity(Center center) throws AppException {
 //        TODO: check filename
         Set<String> errMsgs = new HashSet<>();
         Set<ConstraintViolation<Center>> errors = validator.validate(center);
-        if (errors.size() > 0) {
-            for (ConstraintViolation<Center> err : errors) {
-                String eMsg = err.getPropertyPath().toString() + " " + err.getMessage();
-                errMsgs.add(eMsg);
-            }
+        if (errors.size() == 0) {
+            return;
         }
-
-        return errMsgs;
+        for (ConstraintViolation<Center> err : errors) {
+            String eMsg = err.getPropertyPath().toString() + " " + err.getMessage();
+            errMsgs.add(eMsg);
+        }
+        throw new AppException(errMsgs);
     }
 
-    private String saveLogo(MultipartFile logo, Set<String> errMsgs) {
+    private String saveLogo(MultipartFile logo) {
         if (logo.getSize() == 0) {
             return null;
         }
         String mimeType = logo.getContentType();
         if (logo.getSize() > 5242880 || (mimeType != null && !mimeType.startsWith("image/"))) {
-            errMsgs.add("Logo is invalid");
+            throw new AppException("Logo is invalid");
         }
         return storageService.store(logo, "logo");
     }
