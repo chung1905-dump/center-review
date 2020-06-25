@@ -8,10 +8,10 @@
 <header th:fragment="header">
     <nav class="navbar">
         <h1 class="logo-header">
-            <a th:href="@{/}">(RVTT)</a>|
+            <a th:href="@{/}" th:text="'(RVTT)'"></a>|
         </h1>
-        <a th:href="'#'">New</a> |
-        <a th:href="@{/center/add}">Submit Center</a>
+        <a th:href="'#'" th:text="'Latest Reviews'"></a> |
+        <a th:href="@{/center/add}" th:text="'Submit Center'"></a>
     </nav>
 </header>
 <div th:fragment="messages" class="message">

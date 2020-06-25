@@ -17,7 +17,6 @@ import java.util.*;
 public class CenterController {
     private final CenterService centerService;
 
-
     @Autowired
     public CenterController(CenterService centerService) {
         this.centerService = centerService;
@@ -39,6 +38,10 @@ public class CenterController {
         return "views/center/layout/center-view.html";
     }
 
+    @GetMapping(path = "/{slug}")
+    public String shortView(@PathVariable(name = "slug") String slug, Model model) {
+        return view(slug, model);
+    }
 
     @GetMapping(path = "/center/add")
     public String add() {

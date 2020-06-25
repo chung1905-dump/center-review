@@ -2,6 +2,7 @@ package com.reviewtrungtam.webapp.center.service;
 
 import com.reviewtrungtam.webapp.center.entity.Center;
 import com.reviewtrungtam.webapp.center.repository.CenterRepository;
+import com.reviewtrungtam.webapp.general.config.Status;
 import com.reviewtrungtam.webapp.general.slugify.SlugifyService;
 import com.reviewtrungtam.webapp.general.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CenterService {
     }
 
     public Center findBySlug(String slug) {
-        return centerRepository.findBySlugNameAndIsActiveIsTrue(slug);
+        return centerRepository.findBySlugNameAndStatus(slug, Status.ACTIVE);
     }
 
     public List<Center> getAll() {
@@ -47,6 +48,7 @@ public class CenterService {
     }
 
     public void preSave(Center center, MultipartFile logo, Set<String> errMsgs) {
+        center.setStatus(center.getDefaultStatus());
         errMsgs.addAll(validateEntity(center));
         center.setLogo(saveLogo(logo, errMsgs));
     }

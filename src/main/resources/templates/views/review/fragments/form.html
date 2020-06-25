@@ -1,0 +1,60 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="center" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
+<div class="form" th:fragment="reviewForm(center)" th:if="${center != null}">
+    <form accept-charset="UTF-8" th:action="@{/center/review}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" readonly th:value="${center.id}">
+        <fieldset>
+            <legend th:text="'Review'"></legend>
+            <table>
+                <tr>
+                    <td><span th:text="'Name'"></span></td>
+                    <td><input type="text" name="author_name" th:placeholder="'Anonymous'"></td>
+                </tr>
+                <tr>
+                    <td><span th:text="'Your role'"></span></td>
+                    <td>
+                        <select name="author_role">
+                            <option selected value="0" th:text="'Not relevant to center'"></option>
+                            <option value="1" th:text="'Student'"></option>
+                            <option value="2" th:text="'Employee'"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span th:text="'Comment'"></span></td>
+                    <td><textarea name="comment" th:placeholder="'Please write your review'"
+                                  required cols="30" rows="10"></textarea></td>
+                </tr>
+                <tr>
+                    <td><span th:text="'Rating'"></span></td>
+                    <td>
+                        <select name="rating">
+                            <option value="-2" th:text="'Very Bad center'"></option>
+                            <option value="-1" th:text="'Bad center'"></option>
+                            <option selected value="0" th:text="'No idea'"></option>
+                            <option value="1" th:text="'Good center'"></option>
+                            <option value="2" th:text="'Very Good center'"></option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span th:text="'Anonymous?'"></span></td>
+                    <td><input type="checkbox" name="anonymous"></td>
+                </tr>
+                <tr th:if="false">
+                    <td>
+                        <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button th:text="'Add review'"></button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+</html>

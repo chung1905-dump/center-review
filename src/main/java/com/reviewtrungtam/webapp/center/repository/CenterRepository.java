@@ -11,5 +11,5 @@ public interface CenterRepository extends CrudRepository<Center, Integer> {
     @Override
     List<Center> findAll();
 
-    Center findBySlugNameAndIsActiveIsTrue(String slugName);
+    Center findBySlugNameAndStatus(String slugName, int status);
 }

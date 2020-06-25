@@ -1,9 +1,12 @@
 package com.reviewtrungtam.webapp.center.entity;
 
+import com.reviewtrungtam.webapp.general.config.Status;
+import com.reviewtrungtam.webapp.review.entity.Review;
 import com.reviewtrungtam.webapp.validation.constraints.NullOrURL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 public class Center {
@@ -39,7 +42,14 @@ public class Center {
 
     private String photo;
 
-    private boolean isActive;
+    private int status;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "center")
+    private List<Review> reviewList;
+
+    public int getDefaultStatus() {
+        return Status.ACTIVE;
+    }
 
     public int getId() {
         return id;
@@ -137,11 +147,19 @@ public class Center {
         this.photo = photo;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public int getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public List<Review> getReviewList() {
+        return reviewList;
+    }
+
+    public void setReviewList(List<Review> reviewList) {
+        this.reviewList = reviewList;
     }
 }
