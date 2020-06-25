@@ -1,7 +1,8 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title th:text="'English Center Review'"></title>
+    <title th:text="'Submit center'"></title>
     <link rel="stylesheet" th:href="@{/center/css/center-edit.css}">
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
     <th:block th:insert="views/general/layout :: head"></th:block>
 </head>
 
@@ -9,6 +10,7 @@
 <div class="main-container">
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
+    <div th:replace="views/center/fragments/add-form :: center-add-form"></div>
 </div>
 </body>
 </html>

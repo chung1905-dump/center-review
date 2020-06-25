@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="center" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
+<head>
+    <title th:text="${center?.name != null and center.name.length() > 0 ? center?.name : 'Not found'}"></title>
+    <th:block th:insert="views/general/layout :: head"></th:block>
+</head>
+
+<body>
+<div class="main-container">
+    <div th:replace="views/general/layout :: header"></div>
+    <div th:replace="views/general/layout :: messages"></div>
+    <div th:replace="views/center/fragments/center-detail :: centerDetail(center=${center})"></div>
+</div>
+</body>
+</html>

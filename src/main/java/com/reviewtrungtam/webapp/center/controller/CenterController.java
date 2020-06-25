@@ -28,7 +28,7 @@ public class CenterController {
         List<Center> list = centerService.getAll();
         model.addAttribute("size", list.size());
 
-        return "views/center/center-list.html";
+        return "views/center/layout/center-list.html";
     }
 
 
@@ -36,13 +36,13 @@ public class CenterController {
     public String view(@PathVariable(name = "slug") String slug, Model model) {
         Center center = centerService.findBySlug(slug);
         model.addAttribute("center", center);
-        return "views/center/center-view.html";
+        return "views/center/layout/center-view.html";
     }
 
 
     @GetMapping(path = "/center/add")
     public String add() {
-        return "views/center/center-add.html";
+        return "views/center/layout/center-add.html";
     }
 
     @PostMapping(path = "/center/add")

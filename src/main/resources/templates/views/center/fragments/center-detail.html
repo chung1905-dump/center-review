@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="centerDetail(center)" class="center-detail">
+    <!--/*@thymesVar id="center" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
+    <table th:if="${center != null}">
+        <thead>
+        <tr>
+            <td>
+                <img th:if="${center.logo != null}" th:src="@{/upload/logo/{img}(img=${center.logo})}"
+                     th:alt="${center.name} + 'title'" th:height="'60px'">
+            </td>
+            <td><span th:text="${center.name}"></span></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${center.url != null and center.url.length() > 0}">
+            <td><span th:text="Homepage"></span></td>
+            <td><span th:text="${center.url}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:if="${center == null}" class="center-detail">
+        <h1 th:text="'Not found'"></h1>
+    </div>
+</div>
+</html>
