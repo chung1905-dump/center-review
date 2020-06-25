@@ -1,0 +1,12 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="center" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
+<div class="review-list" th:fragment="listReview(center)" th:if="${center != null}">
+    <table>
+        <tbody>
+        <tr th:each="review: ${center.reviewList}">
+            <td><span th:text="${review.comment}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

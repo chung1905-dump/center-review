@@ -2,6 +2,7 @@ package com.reviewtrungtam.webapp.center.controller;
 
 import com.reviewtrungtam.webapp.center.entity.Center;
 import com.reviewtrungtam.webapp.center.service.CenterService;
+import com.reviewtrungtam.webapp.review.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +36,9 @@ public class CenterController {
     public String view(@PathVariable(name = "slug") String slug, Model model) {
         Center center = centerService.findBySlug(slug);
         model.addAttribute("center", center);
+        Review review = new Review();
+        model.addAttribute("review", review);
+
         return "views/center/layout/center-view.html";
     }
 
