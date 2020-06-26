@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,10 +28,15 @@ public class ReviewController {
     }
 
     @PostMapping(path = "/center/review")
-    public RedirectView add(@RequestParam("center-id") int centerId, Review review, RedirectAttributes redirectAttributes) {
+    public RedirectView add(
+            @RequestParam("center-id") int centerId,
+            Review review,
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest request
+    ) {
         Set<String> errMsgs = new HashSet<>();
         try {
-            reviewService.preSave(review, centerId);
+            reviewService.preSave(review, centerId, request.getRemoteAddr());
             reviewService.save(review);
         } catch (AppException e) {
             errMsgs.add(e.getMessage());

@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
+<div class="review-detail" th:fragment="reviewDetail(review)">
+    <table>
+        <tbody>
+        <tr>
+            <td><img th:src="@{images/anonymous.png}" th:alt="${review.authorName}" th:height="'30px'"></td>
+            <td><span th:text="${review.authorName}"></span><em th:text="' wrote:'"></em></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><span th:text="${review.comment}"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

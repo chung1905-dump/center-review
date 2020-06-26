@@ -22,9 +22,12 @@ public class ReviewService {
         this.centerService = centerService;
     }
 
-    public void preSave(Review review, int centerId) throws AppException {
+    public void preSave(Review review, int centerId, String ip) throws AppException {
         if (centerId > 0) {
             prepareCenter(review, centerId);
+        }
+        if (ip != null && ip.length() > 0) {
+            review.setIp(ip);
         }
         review.setStatus(review.getDefaultStatus());
     }
@@ -33,7 +36,7 @@ public class ReviewService {
         return reviewRepository.save(review);
     }
 
-    private void prepareCenter(Review review, int centerId) throws AppException{
+    private void prepareCenter(Review review, int centerId) throws AppException {
         Center center = centerService.findActiveById(centerId);
         if (center == null) {
             throw new AppException("Center not found!");

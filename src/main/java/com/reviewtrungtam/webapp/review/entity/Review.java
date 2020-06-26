@@ -3,8 +3,14 @@ package com.reviewtrungtam.webapp.review.entity;
 import com.reviewtrungtam.webapp.center.entity.Center;
 import com.reviewtrungtam.webapp.general.config.Status;
 import com.reviewtrungtam.webapp.user.entity.User;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Review {
@@ -33,6 +39,24 @@ public class Review {
     private int status;
 
     private String ip;
+
+    @CreatedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    private Date createdAt;
+
+    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    private Date updatedAt;
+
+    @ManyToOne
+    private Review parent;
+
+    private int level;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
+    private List<Review> children;
 
     public int getDefaultStatus() {
         return Status.ACTIVE;
@@ -124,5 +148,45 @@ public class Review {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Review getParent() {
+        return parent;
+    }
+
+    public void setParent(Review parent) {
+        this.parent = parent;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public List<Review> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Review> children) {
+        this.children = children;
     }
 }

@@ -4,7 +4,7 @@
     <table>
         <tbody>
         <tr th:each="review: ${center.reviewList}">
-            <td><span th:text="${review.comment}"></span></td>
+            <td><div th:replace="views/review/fragments/review-detail :: reviewDetail(${review})"></div></td>
         </tr>
         </tbody>
     </table>

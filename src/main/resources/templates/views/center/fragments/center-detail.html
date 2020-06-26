@@ -6,8 +6,8 @@
         <thead>
         <tr>
             <td>
-                <img th:if="${center.logo != null}" th:src="@{/upload/logo/{img}(img=${center.logo})}"
-                     th:alt="'(' + ${center.name} + ' logo)'" th:height="'60px'">
+                <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'60px'"
+                     th:src="${center.logo == null} ? @{/images/default-center-logo.png} : @{/upload/logo/{img}(img=${center.logo})}">
             </td>
             <td><span th:text="${center.name}"></span></td>
         </tr>
