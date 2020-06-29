@@ -32,18 +32,12 @@ public class CenterController {
         return "views/center/layout/center-list.html";
     }
 
-
-    @GetMapping(path = "/center/view/{slug}")
+    @GetMapping(path = "/{slug}")
     public String view(@PathVariable(name = "slug") String slug, Model model) {
         Center center = centerService.findActiveBySlug(slug);
         model.addAttribute("center", center);
 
         return "views/center/layout/center-view.html";
-    }
-
-    @GetMapping(path = "/{slug}")
-    public String shortView(@PathVariable(name = "slug") String slug, Model model) {
-        return view(slug, model);
     }
 
     @GetMapping(path = "/center/add")
