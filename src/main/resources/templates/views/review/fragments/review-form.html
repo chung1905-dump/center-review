@@ -15,9 +15,12 @@
                     <td><span th:text="'Your role'"></span></td>
                     <td>
                         <select name="authorRole">
-                            <option selected th:value="0" th:text="'Not relevant to center'"></option>
-                            <option th:value="1" th:text="'Student'"></option>
-                            <option th:value="2" th:text="'Employee'"></option>
+                            <option selected th:value="${T(com.reviewtrungtam.webapp.review.config.Role).NOT_SPECIFIC}"
+                                    th:text="'Not specified'"></option>
+                            <option th:value="${T(com.reviewtrungtam.webapp.review.config.Role).STUDENT}"
+                                    th:text="'Student'"></option>
+                            <option th:value="${T(com.reviewtrungtam.webapp.review.config.Role).EMPLOYEE}"
+                                    th:text="'Employee'"></option>
                         </select>
                     </td>
                 </tr>

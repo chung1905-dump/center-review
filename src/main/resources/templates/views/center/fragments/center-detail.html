@@ -11,11 +11,31 @@
             </td>
             <td><span th:text="${center.name}"></span></td>
         </tr>
+        <tr>
+            <td>Point</td>
+            <td><span th:text="${center.point / 50 + 6} + '/10'"></span></td>
+        </tr>
         </thead>
         <tbody>
         <tr th:if="${center.url != null and center.url.length() > 0}">
             <td><span th:text="Homepage"></span></td>
-            <td><span th:text="${center.url}"></span></td>
+            <td><a th:href="${center.url}" th:text="${center.url}"></a></td>
+        </tr>
+        <tr th:if="${center.facebook != null and center.facebook.length() > 0}">
+            <td><span th:text="Facebook"></span></td>
+            <td><a th:href="${center.facebook}" th:text="${center.facebook}"></a></td>
+        </tr>
+        <tr th:if="${center.youtube != null and center.youtube.length() > 0}">
+            <td><span th:text="Youtube Channel"></span></td>
+            <td><a th:href="${center.youtube}" th:text="${center.youtube}"></a></td>
+        </tr>
+        <tr th:if="${false && center.phone != null and center.phone.length() > 0}">
+            <td><span th:text="Phone"></span></td>
+            <td><span th:text="${center.phone}"></span></td>
+        </tr>
+        <tr th:if="${center.owner != null and center.owner.length() > 0}">
+            <td><span th:text="Owner"></span></td>
+            <td><span th:text="${center.owner}"></span></td>
         </tr>
         </tbody>
     </table>

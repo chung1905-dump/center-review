@@ -44,6 +44,8 @@ public class Center {
 
     private int status;
 
+    private int total;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "center")
     private List<Review> reviewList;
 
@@ -161,5 +163,13 @@ public class Center {
 
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
     }
 }

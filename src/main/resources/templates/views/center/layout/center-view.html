@@ -3,6 +3,8 @@
 <head>
     <title th:text="${center?.name != null and center.name.length() > 0 ? center?.name : 'Not found'}"></title>
     <th:block th:insert="views/general/layout :: head"></th:block>
+    <script th:src="@{/center/js/center-view.js}"></script>
+    <link rel="stylesheet" th:href="@{/center/css/center-view.css}">
 </head>
 
 <body>
@@ -10,7 +12,8 @@
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
     <div th:replace="views/center/fragments/center-detail :: centerDetail(center=${center})"></div>
-    <div th:replace="views/review/fragments/review-form :: reviewForm(center=${center})"></div>
+    <button th:onclick="toggleDisplay('.center-review-form')" th:text="'Review'"></button>
+    <div class="center-review-form" th:insert="views/review/fragments/review-form :: reviewForm(center=${center})"></div>
     <div th:replace="views/review/fragments/review-list :: listReview(center=${center})"></div>
 </div>
 </body>

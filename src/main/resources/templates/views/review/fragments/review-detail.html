@@ -5,11 +5,29 @@
         <tbody>
         <tr>
             <td><img th:src="@{images/anonymous.png}" th:alt="${review.authorName}" th:height="'30px'"></td>
-            <td><span th:text="${review.authorName}"></span><em th:text="' wrote:'"></em></td>
+            <td>
+                <span th:text="${review.authorName}"
+                      th:unless="${#strings.isEmpty(review.authorName)}"></span>
+                <em th:if="${#strings.isEmpty(review.authorName)}"
+                    th:text="'Anonymous'"></em>
+                <th:block th:switch="${review.authorRole}">
+                    <i th:case="${T(com.reviewtrungtam.webapp.review.config.Role).STUDENT}"
+                       th:text="'(Student)'">
+                    </i>
+                    <i th:case="${T(com.reviewtrungtam.webapp.review.config.Role).EMPLOYEE}"
+                         th:text="'(Employee)'">
+                    </i>
+                </th:block>
+                <em th:text="' wrote:'"></em>
+            </td>
         </tr>
         <tr>
             <td></td>
             <td><span th:text="${review.comment}"></span></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><a href="" th:text="'Reply'"></a></td>
         </tr>
         </tbody>
     </table>

@@ -55,6 +55,8 @@ public class CenterController {
     public RedirectView addPost(@RequestParam("logo-image") MultipartFile file, Center center, RedirectAttributes redirectAttributes) {
         Set<String> errMsgs = new HashSet<>();
         try {
+            center.setTotal(0);
+            center.setPoint(0);
             centerService.preSave(center, file);
             centerService.save(center);
         } catch (AppException e) {

@@ -18,14 +18,17 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(nullable = false)
     private int rating;
 
+    @Column(nullable = false)
     private String comment;
 
     private boolean anonymous;
 
     private String authorName;
 
+    @Column(nullable = false)
     private String authorRole;
 
     @ManyToOne
@@ -34,6 +37,13 @@ public class Review {
     @ManyToOne
     private User user;
 
+    @Column(nullable = false)
+    private int upVote;
+
+    @Column(nullable = false)
+    private int downVote;
+
+    @Column(nullable = false)
     private int point;
 
     private int status;
@@ -124,6 +134,22 @@ public class Review {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public int getUpVote() {
+        return upVote;
+    }
+
+    public void setUpVote(int upVote) {
+        this.upVote = upVote;
+    }
+
+    public int getDownVote() {
+        return downVote;
+    }
+
+    public void setDownVote(int downVote) {
+        this.downVote = downVote;
     }
 
     public int getPoint() {

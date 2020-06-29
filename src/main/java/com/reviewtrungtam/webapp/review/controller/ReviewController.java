@@ -36,6 +36,9 @@ public class ReviewController {
     ) {
         Set<String> errMsgs = new HashSet<>();
         try {
+            review.setDownVote(0);
+            review.setUpVote(0);
+            review.setPoint(0);
             reviewService.preSave(review, centerId, request.getRemoteAddr());
             reviewService.save(review);
         } catch (AppException e) {
