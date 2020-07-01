@@ -8,10 +8,6 @@
             <legend th:text="'Review'"></legend>
             <table>
                 <tr>
-                    <td><span th:text="'Name'"></span></td>
-                    <td><input type="text" name="authorName" th:placeholder="'Anonymous'"></td>
-                </tr>
-                <tr>
                     <td><span th:text="'Your role'"></span></td>
                     <td>
                         <select name="authorRole">
@@ -41,7 +37,7 @@
                         </select>
                     </td>
                 </tr>
-                <tr>
+                <tr th:unless="${@userService.isAnonymous()}">
                     <td><span th:text="'Anonymous?'"></span></td>
                     <td><input type="checkbox" name="anonymous"></td>
                 </tr>

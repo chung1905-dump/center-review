@@ -7,7 +7,11 @@ import com.reviewtrungtam.webapp.general.config.Status;
 import com.reviewtrungtam.webapp.general.exception.AppException;
 import com.reviewtrungtam.webapp.review.entity.Review;
 import com.reviewtrungtam.webapp.review.repository.ReviewRepository;
+import com.reviewtrungtam.webapp.user.core.UserDetails;
+import com.reviewtrungtam.webapp.user.entity.User;
+import com.reviewtrungtam.webapp.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -23,27 +27,33 @@ public class ReviewService {
 
     private final CenterService centerService;
 
+    private final UserService userService;
+
     @Autowired
     public ReviewService(
             ReviewRepository reviewRepository,
             CenterService centerService,
-            CenterRepository centerRepository
+            CenterRepository centerRepository,
+            UserService userService
     ) {
         this.reviewRepository = reviewRepository;
         this.centerService = centerService;
         this.centerRepository = centerRepository;
+        this.userService = userService;
     }
 
     public void preSave(Review review, int centerId, String ip) throws AppException {
         if (centerId > 0) {
             setCenterEntity(review, centerId);
         }
+
         if (ip != null && ip.length() > 0) {
             review.setIp(ip);
         }
 
         review.setStatus(review.getDefaultStatus());
         review.setRating(review.getRating() * 100);
+        prepareAuthor(review);
     }
 
     public void setParent(Review review, Review parent) throws AppException {
@@ -70,8 +80,24 @@ public class ReviewService {
 
     public void validateNewReview(Review review) throws AppException {
         if (review.getDownVote() != 0 || review.getUpVote() != 0 || review.getPoint() != 0 ||
-                review.getRating() < -2 || review.getRating() > 2) {
+                review.getRating() < -2 || review.getRating() > 2 ||
+                review.getComment() == null || review.getComment().isBlank()) {
             throw new AppException("Invalid Review");
+        }
+    }
+
+    private void prepareAuthor(Review review) {
+        if (userService.isAnonymous()) {
+            review.setAnonymous(true);
+        } else {
+            User u = ((UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
+            review.setUser(u);
+        }
+
+        if (review.isAnonymous()) {
+            review.setAuthorName(null);
+        } else {
+            review.setAuthorName(SecurityContextHolder.getContext().getAuthentication().getName());
         }
     }
 

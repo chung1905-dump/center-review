@@ -8,8 +8,8 @@
             <td>
                 <span th:text="${review.authorName}"
                       th:unless="${#strings.isEmpty(review.authorName)}"></span>
-                <em th:if="${#strings.isEmpty(review.authorName)}"
-                    th:text="'Anonymous'"></em>
+                <span><em th:if="${#strings.isEmpty(review.authorName)}"
+                    th:text="'Anonymous'"></em></span>
                 <th:block th:switch="${review.authorRole}">
                     <i th:case="${T(com.reviewtrungtam.webapp.review.config.Role).STUDENT}"
                        th:text="'(Student)'">
@@ -18,7 +18,6 @@
                          th:text="'(Employee)'">
                     </i>
                 </th:block>
-                <em th:text="' wrote:'"></em>
             </td>
         </tr>
         <tr>

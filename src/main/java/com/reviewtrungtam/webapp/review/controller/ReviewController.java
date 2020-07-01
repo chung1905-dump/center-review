@@ -42,6 +42,7 @@ public class ReviewController {
             redirectAttributes.addFlashAttribute("errs", errMsgs);
         } catch (Exception e) {
             errMsgs.add("Error while adding review");
+            System.out.println(e.getMessage());
             redirectAttributes.addFlashAttribute("errs", errMsgs);
         }
         return new RedirectView("/");
