@@ -1,7 +1,5 @@
 package com.reviewtrungtam.webapp.review.controller;
 
-import com.reviewtrungtam.webapp.center.entity.Center;
-import com.reviewtrungtam.webapp.center.service.CenterService;
 import com.reviewtrungtam.webapp.general.exception.AppException;
 import com.reviewtrungtam.webapp.review.entity.Review;
 import com.reviewtrungtam.webapp.review.service.ReviewService;
@@ -36,9 +34,7 @@ public class ReviewController {
     ) {
         Set<String> errMsgs = new HashSet<>();
         try {
-            review.setDownVote(0);
-            review.setUpVote(0);
-            review.setPoint(0);
+            reviewService.validateNewReview(review);
             reviewService.preSave(review, centerId, request.getRemoteAddr());
             reviewService.save(review);
         } catch (AppException e) {

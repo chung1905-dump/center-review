@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="'Register'"></title>
+    <link rel="stylesheet" th:href="@{/center/css/center-edit.css}">
+    <script th:if="false" src="https://hcaptcha.com/1/api.js" async defer></script>
+    <th:block th:insert="views/general/layout :: head"></th:block>
+</head>
+
+<body>
+<div class="main-container">
+    <div th:replace="views/general/layout :: header"></div>
+    <div th:replace="views/general/layout :: messages"></div>
+    <div th:replace="views/user/fragments/register-form :: registerForm"></div>
+</div>
+</body>
+</html>

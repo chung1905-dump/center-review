@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VoteRepository extends CrudRepository<Vote, Integer> {
     @Override
-    Vote save(Vote s);
+    <S extends Vote> S save(S s);
 
     Vote findByUserAndReview(User user, Review review);
 }

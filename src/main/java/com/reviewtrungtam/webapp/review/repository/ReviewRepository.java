@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ReviewRepository extends CrudRepository<Review, Integer> {
     @Override
-    Review save(Review s);
+    <S extends Review> S save(S s);
 
     int countByCenter(Center center);
 }

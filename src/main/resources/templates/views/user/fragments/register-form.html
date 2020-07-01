@@ -1,0 +1,23 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<div class="form" th:fragment="registerForm">
+    <form accept-charset="UTF-8" th:action="@{/register}" method="POST">
+        <h2>Register</h2>
+        <table>
+            <tr>
+                <td><span th:text="'Username'"></span></td>
+                <td><input type="text" name="userName"></td>
+            </tr>
+            <tr>
+                <td><span th:text="'Password'"></span></td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td>
+                    <button th:text="'Submit'"></button>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</html>

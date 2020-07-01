@@ -41,6 +41,7 @@ public class ReviewService {
         if (ip != null && ip.length() > 0) {
             review.setIp(ip);
         }
+
         review.setStatus(review.getDefaultStatus());
         review.setRating(review.getRating() * 100);
     }
@@ -65,6 +66,13 @@ public class ReviewService {
         reviewRepository.save(review);
         updateCenterPoint(review);
         return review;
+    }
+
+    public void validateNewReview(Review review) throws AppException {
+        if (review.getDownVote() != 0 || review.getUpVote() != 0 || review.getPoint() != 0 ||
+                review.getRating() < -2 || review.getRating() > 2) {
+            throw new AppException("Invalid Review");
+        }
     }
 
     private void updateCenterPoint(Review review) {

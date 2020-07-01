@@ -1,10 +1,10 @@
 package com.reviewtrungtam.webapp.user.core;
 
-import com.reviewtrungtam.webapp.user.entity.User;
 import org.springframework.boot.json.BasicJsonParser;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -13,8 +13,8 @@ import java.util.Set;
 
 @Component
 public class UserDetailsFactory {
-    public UserDetails create(User user) {
-        return new UserDetails(user.getUserName(), user.getPassword(), parseAuthorities(user.getRoles()));
+    public User create(com.reviewtrungtam.webapp.user.entity.User user) {
+        return new User(user.getUserName(), user.getPassword(), parseAuthorities(user.getRoles()));
     }
 
     private Set<GrantedAuthority> parseAuthorities(String roles) {

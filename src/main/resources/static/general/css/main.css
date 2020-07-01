@@ -13,3 +13,13 @@ body {
     display: inline;
 }
 
+.left-nav {
+    width: 80%;
+    display: inline-block;
+}
+
+.right-nav {
+    text-align: right;
+    display: inline-block;
+    width: 19%;
+}
