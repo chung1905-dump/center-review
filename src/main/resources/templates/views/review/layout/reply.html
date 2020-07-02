@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
 <head>
-    <title th:text="'Submit center'"></title>
-    <link rel="stylesheet" th:href="@{/center/css/center-edit.css}">
+    <title th:text="'Add Reply'"></title>
     <th:block th:insert="views/general/layout :: head"></th:block>
 </head>
 
@@ -9,7 +9,8 @@
 <div class="main-container">
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
-    <div th:replace="views/center/fragments/add-form :: center-add-form"></div>
+    <div th:replace="views/review/fragments/review-detail :: reviewDetail(review=${review})"></div>
+    <div class="center-reply-form" th:insert="views/review/fragments/reply-form :: replyForm(review=${review})"></div>
 </div>
 </body>
 </html>

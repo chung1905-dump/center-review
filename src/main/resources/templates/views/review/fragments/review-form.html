@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="center" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
-<!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
 <div class="form" th:fragment="reviewForm(center)" th:if="${center != null}">
-    <form accept-charset="UTF-8" th:action="@{/center/review}" method="POST" enctype="multipart/form-data">
+    <form accept-charset="UTF-8" th:action="@{/review/add}" method="POST" enctype="multipart/form-data">
         <input type="hidden" readonly name="center-id" th:value="${center.id}">
         <fieldset>
             <legend th:text="'Review'"></legend>
@@ -40,12 +39,6 @@
                 <tr th:unless="${@userService.isAnonymous()}">
                     <td><span th:text="'Anonymous?'"></span></td>
                     <td><input type="checkbox" name="anonymous"></td>
-                </tr>
-                <tr th:if="false">
-                    <td>
-                        <div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001"></div>
-                    </td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td>

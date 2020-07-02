@@ -25,7 +25,7 @@ public class ReviewController {
         this.reviewService = reviewService;
     }
 
-    @PostMapping(path = "/center/review")
+    @PostMapping(path = "/review/add")
     public RedirectView add(
             @RequestParam("center-id") int centerId,
             Review review,

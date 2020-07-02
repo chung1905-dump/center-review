@@ -4,20 +4,20 @@
     <table>
         <tbody>
         <tr>
-            <td><img th:src="@{images/anonymous.png}" th:alt="${review.authorName}" th:height="'30px'"></td>
+            <td><img th:src="@{/images/anonymous.png}" th:alt="${review.authorName}" th:height="'30px'"></td>
             <td>
-                <span th:text="${review.authorName}"
-                      th:unless="${#strings.isEmpty(review.authorName)}"></span>
+                <span th:text="${review.authorName}" th:unless="${#strings.isEmpty(review.authorName)}"></span>
                 <span><em th:if="${#strings.isEmpty(review.authorName)}"
-                    th:text="'Anonymous'"></em></span>
+                          th:text="'Anonymous'"></em></span>
                 <th:block th:switch="${review.authorRole}">
                     <i th:case="${T(com.reviewtrungtam.webapp.review.config.Role).STUDENT}"
                        th:text="'(Student)'">
                     </i>
                     <i th:case="${T(com.reviewtrungtam.webapp.review.config.Role).EMPLOYEE}"
-                         th:text="'(Employee)'">
+                       th:text="'(Employee)'">
                     </i>
                 </th:block>
+                <i th:text="${review.rating + 3}"></i>
             </td>
         </tr>
         <tr>

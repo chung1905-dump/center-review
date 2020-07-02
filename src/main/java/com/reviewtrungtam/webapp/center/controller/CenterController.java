@@ -32,7 +32,7 @@ public class CenterController {
         return "views/center/layout/center-list.html";
     }
 
-    @GetMapping(path = "/{slug}")
+    @GetMapping(path = "/c/{slug}")
     public String view(@PathVariable(name = "slug") String slug, Model model) {
         Center center = centerService.findActiveBySlug(slug);
         model.addAttribute("center", center);
@@ -49,7 +49,6 @@ public class CenterController {
     public RedirectView addPost(@RequestParam("logo-image") MultipartFile file, Center center, RedirectAttributes redirectAttributes) {
         Set<String> errMsgs = new HashSet<>();
         try {
-            center.setTotal(0);
             center.setPoint(0);
             centerService.preSave(center, file);
             centerService.save(center);

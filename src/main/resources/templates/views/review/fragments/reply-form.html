@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
+<div class="form" th:fragment="replyForm(review)" th:if="${review != null}">
+    <form accept-charset="UTF-8" th:action="@{/reply/add}" method="POST" enctype="multipart/form-data">
+        <input type="hidden" readonly name="parent-id" th:value="${review.id}">
+        <fieldset>
+            <legend th:text="'Reply'"></legend>
+            <table>
+                <tr>
+                    <td><span th:text="'Comment'"></span></td>
+                    <td><textarea name="comment" th:placeholder="'Please write your review'"
+                                  required cols="30" rows="10"></textarea></td>
+                </tr>
+                <tr th:unless="${@userService.isAnonymous()}">
+                    <td><span th:text="'Anonymous?'"></span></td>
+                    <td><input type="checkbox" name="anonymous"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button th:text="'Reply'"></button>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+    </form>
+</div>
+</html>

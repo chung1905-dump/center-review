@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -102,13 +103,16 @@ public class ReviewService {
     }
 
     private void updateCenterPoint(Review review) {
-//        TODO: Optimize this
+        if (review.getRating() == 0) return;
         Center center = review.getCenter();
-        int total = center.getTotal() + review.getRating();
-        int reviewNumber = center.getReviewList().size();
-        int newPoint = total / reviewNumber;
-        center.setPoint(newPoint);
-        center.setTotal(total);
+        List<Review> reviews = center.getReviewList();
+        int sum = review.getRating(), count = 1;
+        for (Review r : reviews) {
+            if (r.getRating() == 0 || r.getStatus() != Status.ACTIVE) continue;
+            sum += r.getRating();
+            count++;
+        }
+        center.setPoint(sum / count);
         centerRepository.save(center);
     }
 
