@@ -57,6 +57,10 @@ public class CenterService {
         return centerRepository.findAll(pageRequest).toList();
     }
 
+    public long countActiveCenter() {
+        return centerRepository.countByStatus(Status.ACTIVE);
+    }
+
     public void preSave(Center center, MultipartFile logo) throws AppException {
         center.setStatus(center.getDefaultStatus());
         validateEntity(center);

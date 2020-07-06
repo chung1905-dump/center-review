@@ -50,6 +50,10 @@ public class CenterController {
         List<Center> list = centerService.getNewUpdatedReview(limit, page);
         model.addAttribute("title", "Latest Updated");
         model.addAttribute("centers", list);
+        model.addAttribute("total", centerService.countActiveCenter());
+        model.addAttribute("currentUrl", "/");
+        model.addAttribute("limit", limit);
+        model.addAttribute("page", page);
 
         return "views/center/layout/center-list.html";
     }

@@ -8,6 +8,10 @@ body {
     background-color: #fceee9;
 }
 
+a {
+    text-decoration: none;
+}
+
 .logo-header {
     padding: 10px;
     display: inline;

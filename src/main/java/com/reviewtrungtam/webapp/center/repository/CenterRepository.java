@@ -11,6 +11,8 @@ public interface CenterRepository extends PagingAndSortingRepository<Center, Int
 
     Center findByIdAndStatus(int id, int status);
 
+    long countByStatus(int status);
+
     @Query(value = "SELECT c, SUM(r.rating) AS total FROM Center c " +
             "JOIN Review r ON r.center = c " +
             "WHERE c.id = ?1", nativeQuery = true)

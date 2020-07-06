@@ -10,6 +10,7 @@
 <div class="main-container">
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
+    <div th:replace="views/general/fragments/paginator :: paginator(${currentUrl}, ${page}, ${limit}, ${total})"></div>
     <div>
         <table>
             <tbody>
@@ -30,6 +31,7 @@
             </tbody>
         </table>
     </div>
+    <div th:replace="views/general/fragments/paginator :: paginator(${currentUrl}, ${page}, ${limit}, ${total})"></div>
 </div>
 </body>
 </html>

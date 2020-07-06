@@ -1,0 +1,11 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="paginator(currentUrl, page, limit, total)">
+    <!--/*@thymesVar id="currentUrl" type="java.lang.String"*/-->
+    <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
+    <!--/*@thymesVar id="limit" type="java.lang.Integer"*/-->
+    <!--/*@thymesVar id="total" type="java.lang.Integer"*/-->
+    <a th:if="${page > 0}" th:href="@{${currentUrl}(p=${page - 1}, l=${limit})}" th:text="'<< Prev Page &emsp;'"></a>
+    <a th:if="${page < total / limit}" th:href="@{${currentUrl}(p=${page + 1}, l=${limit})}" th:text="'Next Page >>'"></a>
+</div>
+</html>
