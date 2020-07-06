@@ -1,0 +1,24 @@
+.center-td1 {
+    text-align: center;
+    width: 15%;
+}
+
+.center-td1 img {
+    border-radius: 10px;
+}
+
+.space-tr {
+    height: 25px;
+}
+
+.center-name {
+    font-size: 17pt;
+}
+
+.center-td2 {
+    padding-left: 2%;
+}
+
+.center-table {
+    width: 100%;
+}

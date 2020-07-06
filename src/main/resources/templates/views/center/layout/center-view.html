@@ -11,7 +11,7 @@
 <div class="main-container">
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
-    <div th:unless="${center == null}">
+    <div class="center-view" th:unless="${center == null}">
         <div th:replace="views/center/fragments/center-detail :: centerDetail(center=${center})"></div>
         <button th:onclick="toggleDisplay('.center-review-form')" th:text="'Review'"></button>
         <div class="center-review-form"

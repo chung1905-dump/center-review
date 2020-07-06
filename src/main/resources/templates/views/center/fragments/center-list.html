@@ -4,26 +4,27 @@
 <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="limit" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="total" type="java.lang.Integer"*/-->
-<div th:fragment="centerList(centers, currentUrl, page, limit, total)">
+<div class="center-list" th:fragment="centerList(centers, currentUrl, page, limit, total)" style="margin: 4%">
     <div th:replace="views/general/fragments/paginator :: paginator(${currentUrl}, ${page}, ${limit}, ${total})"></div>
-    <div>
-        <table>
-            <tbody>
-            <tr th:each="center: ${centers}">
-                <td>
-                    <a th:href="@{/c/{slug}(slug=${center.slugName})}">
-                        <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'60px'"
-                             th:src="${center.logo == null} ? @{/images/default-center-logo.png} : @{/upload/logo/{img}(img=${center.logo})}">
-                    </a>
-                </td>
-                <td>
-                    <a th:href="@{/c/{slug}(slug=${center.slugName})}">
-                        <span th:text="${center.name}"></span>
-                    </a>
-                    <div th:replace="views/general/fragments/rating :: showRating(${center.point})"></div>
-                </td>
-            </tr>
-            </tbody>
+    <div class="center-div">
+        <table class="center-table">
+            <th:block th:each="center: ${centers}">
+                <tr class="center-tr" >
+                    <td class="center-td1">
+                        <a th:href="@{/c/{slug}(slug=${center.slugName})}">
+                            <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'120px'"
+                                 th:src="${center.logo == null} ? @{/images/default-center-logo.png} : @{/upload/logo/{img}(img=${center.logo})}">
+                        </a>
+                    </td>
+                    <td class="center-td2">
+                        <a th:href="@{/c/{slug}(slug=${center.slugName})}">
+                            <span class="center-name" th:text="${center.name}"></span>
+                        </a>
+                        <div th:replace="views/general/fragments/rating :: showRating(${center.point})"></div>
+                    </td>
+                </tr>
+                <tr class="space-tr"></tr>
+            </th:block>
         </table>
     </div>
     <div th:replace="views/general/fragments/paginator :: paginator(${currentUrl}, ${page}, ${limit}, ${total})"></div>

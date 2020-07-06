@@ -11,9 +11,9 @@
     <nav class="navbar">
         <div class="left-nav">
             <h1 class="logo-header">
-                <a th:href="@{/}" th:text="'(RVTT)'"></a>|
+                <a th:href="@{/}" th:text="'(RVTT)'"></a>
             </h1>
-            <a th:href="'/search'" th:text="'Search'"></a> |
+            <a th:href="'/search'" th:text="'Search'"></a>
             <a th:href="@{/center/add}" th:text="'Submit Center'"></a>
         </div>
         <div class="right-nav" th:if="${@userService.isAnonymous()}">
@@ -21,7 +21,7 @@
             <a th:href="@{/register}" th:text="'Register'"></a>
         </div>
         <div class="right-nav" th:unless="${@userService.isAnonymous()}">
-            <a th:text="${#authentication.getName()}"></a> |
+            <a th:text="${#authentication.getName()}"></a>
             <a th:href="@{/logout}" th:text="'Logout'"></a>
         </div>
     </nav>

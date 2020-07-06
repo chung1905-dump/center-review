@@ -2,14 +2,14 @@
 
 <div th:fragment="centerDetail(center)" class="center-detail">
     <!--/*@thymesVar id="center" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
-    <table th:if="${center != null}">
+    <table class="center-detail-table" th:if="${center != null}">
         <thead>
         <tr>
-            <td>
-                <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'60px'"
+            <td style="width: 22%">
+                <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'180px'"
                      th:src="${center.logo == null} ? @{/images/default-center-logo.png} : @{/upload/logo/{img}(img=${center.logo})}">
             </td>
-            <td><span th:text="${center.name}"></span></td>
+            <td><span class="center-name" th:text="${center.name}"></span></td>
         </tr>
         <tr>
             <td>Point</td>

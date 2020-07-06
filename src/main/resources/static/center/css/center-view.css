@@ -1,3 +1,16 @@
 .center-review-form {
     display: none;
 }
+
+.center-view {
+    margin: 4%;
+}
+
+.center-detail-table {
+    width: 100%;
+    font-size: 18pt;
+}
+
+.center-detail-table .center-name {
+    font-size: 2em;
+}

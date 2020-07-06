@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
 <div class="review-detail" th:fragment="reviewDetail(review)">
-    <table th:id="'review-' + ${review.id}" style="border-left: 1px dashed"
-           th:onclick="'toggleDisplay(\'#review-' + ${review.id} + ' .reply-children\')'">
+    <table th:id="'review-' + ${review.id}" style="border-left: 1px dashed">
         <tbody>
         <tr>
             <td><img th:src="@{/images/anonymous.png}" th:alt="${review.authorName}" th:height="'30px'"></td>
