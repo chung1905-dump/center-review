@@ -7,6 +7,10 @@ import com.reviewtrungtam.webapp.general.exception.AppException;
 import com.reviewtrungtam.webapp.general.slugify.SlugifyService;
 import com.reviewtrungtam.webapp.general.storage.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,8 +52,9 @@ public class CenterService {
         return centerRepository.findByIdAndStatus(id, Status.ACTIVE);
     }
 
-    public List<Center> getAll() {
-        return centerRepository.findAll();
+    public List<Center> getNewUpdatedReview(int limit) {
+        Pageable pageRequest = PageRequest.of(0, limit, Sort.by("lastReviewTime").descending());
+        return centerRepository.findAll(pageRequest).toList();
     }
 
     public void preSave(Center center, MultipartFile logo) throws AppException {

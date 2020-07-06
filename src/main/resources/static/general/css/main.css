@@ -23,3 +23,19 @@ body {
     display: inline-block;
     width: 19%;
 }
+
+.rating.plus:before {
+    content: "➕";
+}
+
+.rating.minus:before {
+    content: "➖";
+}
+
+.rating.green {
+    color: green;
+}
+
+.rating.red {
+    color: red;
+}

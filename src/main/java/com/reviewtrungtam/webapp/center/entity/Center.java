@@ -6,6 +6,7 @@ import com.reviewtrungtam.webapp.validation.constraints.NullOrURL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -46,6 +47,8 @@ public class Center {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "center")
     private List<Review> reviewList;
+
+    private Date lastReviewTime;
 
     public int getDefaultStatus() {
         return Status.ACTIVE;
@@ -161,5 +164,13 @@ public class Center {
 
     public void setReviewList(List<Review> reviewList) {
         this.reviewList = reviewList;
+    }
+
+    public Date getLastReviewTime() {
+        return lastReviewTime;
+    }
+
+    public void setLastReviewTime(Date lastReviewTime) {
+        this.lastReviewTime = lastReviewTime;
     }
 }

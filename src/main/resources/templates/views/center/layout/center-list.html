@@ -5,9 +5,30 @@
 </head>
 
 <body>
+<!--/*@thymesVar id="centers" type="com.reviewtrungtam.webapp.center.entity.Center"*/-->
 <div class="main-container">
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
+    <div>
+        <table>
+            <tbody>
+            <tr th:each="center: ${centers}">
+                <td>
+                    <a th:href="@{/c/{slug}(slug=${center.slugName})}">
+                        <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'60px'"
+                             th:src="${center.logo == null} ? @{/images/default-center-logo.png} : @{/upload/logo/{img}(img=${center.logo})}">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/c/{slug}(slug=${center.slugName})}">
+                        <span th:text="${center.name}"></span>
+                    </a>
+                    <div th:replace="views/general/fragments/rating :: showRating(${center.point})"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

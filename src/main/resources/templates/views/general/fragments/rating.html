@@ -1,0 +1,8 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div th:fragment="showRating(rating)">
+    <!--/*@thymesVar id="rating" type="java.lang.Integer"*/-->
+    <span th:if="${rating} > 0" class="rating plus green" th:each="i : ${#numbers.sequence(1, rating/40)}"></span>
+    <span th:if="${rating} < 0" class="rating minus red" th:each="i : ${#numbers.sequence(1, -rating/40)}"></span>
+</div>
+</html>

@@ -45,6 +45,7 @@ public class ReviewController {
             System.out.println(e.getMessage());
             redirectAttributes.addFlashAttribute("errs", errMsgs);
         }
-        return new RedirectView("/" + centerId);
+        // TODO: review.getCenter() can return null
+        return new RedirectView("/c/" + review.getCenter().getSlugName());
     }
 }

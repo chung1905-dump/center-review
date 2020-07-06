@@ -13,7 +13,9 @@
         </tr>
         <tr>
             <td>Point</td>
-            <td><span th:text="${center.point / 50 + 6} + '/10'"></span></td>
+            <td>
+                <div th:replace="views/general/fragments/rating :: showRating(${center.point})"></div>
+            </td>
         </tr>
         </thead>
         <tbody>
@@ -39,8 +41,5 @@
         </tr>
         </tbody>
     </table>
-    <div th:if="${center == null}" class="center-detail">
-        <h1 th:text="'Not found'"></h1>
-    </div>
 </div>
 </html>

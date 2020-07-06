@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -74,6 +75,7 @@ public class ReviewService {
 
     public Review save(Review review) {
         reviewRepository.save(review);
+        updateCenterLatestReview(getCenter(review));
         updateCenterPoint(review);
         return review;
     }
@@ -116,11 +118,17 @@ public class ReviewService {
         }
     }
 
+    private void updateCenterLatestReview(Center center) {
+        center.setLastReviewTime(new Date());
+        centerRepository.save(center);
+        // TODO: Duplicate .save(center)
+    }
+
     private void updateCenterPoint(Review review) {
         if (review.getRating() == 0) return;
         Center center = review.getCenter();
         List<Review> reviews = center.getReviewList();
-        int sum = review.getRating(), count = 1;
+        int sum = 0, count = 0;
         for (Review r : reviews) {
             if (r.getRating() == 0 || r.getStatus() != Status.ACTIVE) continue;
             sum += r.getRating();

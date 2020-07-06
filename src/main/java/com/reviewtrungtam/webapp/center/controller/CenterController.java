@@ -26,8 +26,8 @@ public class CenterController {
 
     @GetMapping(path = "/")
     public String list(Model model) {
-        List<Center> list = centerService.getAll();
-        model.addAttribute("size", list.size());
+        List<Center> list = centerService.getNewUpdatedReview(5);
+        model.addAttribute("centers", list);
 
         return "views/center/layout/center-list.html";
     }
