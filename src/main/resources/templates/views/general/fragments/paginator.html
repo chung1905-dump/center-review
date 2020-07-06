@@ -6,6 +6,6 @@
     <!--/*@thymesVar id="limit" type="java.lang.Integer"*/-->
     <!--/*@thymesVar id="total" type="java.lang.Integer"*/-->
     <a th:if="${page > 0}" th:href="@{${currentUrl}(p=${page - 1}, l=${limit})}" th:text="'<< Prev Page &emsp;'"></a>
-    <a th:if="${page < total / limit}" th:href="@{${currentUrl}(p=${page + 1}, l=${limit})}" th:text="'Next Page >>'"></a>
+    <a th:if="${page + 1 < total}" th:href="@{${currentUrl}(p=${page + 1}, l=${limit})}" th:text="'Next Page >>'"></a>
 </div>
 </html>

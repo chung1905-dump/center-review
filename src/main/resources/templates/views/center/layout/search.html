@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title th:text="'Search'"></title>
+    <th:block th:insert="views/general/layout :: head"></th:block>
+</head>
+
+<body>
+<div class="main-container">
+    <div th:replace="views/general/layout :: header"></div>
+    <div th:replace="views/general/layout :: messages"></div>
+    <div style="text-align: center; margin-top: 8%;">
+        <span th:text="'(Search)'" style="font-size: 32px; font-weight: bold; color: #dc5e47;"></span>
+        <!--/*@thymesVar id="query" type="java.lang.String"*/-->
+        <div th:replace="views/center/fragments/search-form :: searchForm(${query})"></div>
+    </div>
+</div>
+</body>
+</html>

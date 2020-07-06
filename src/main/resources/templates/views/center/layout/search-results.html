@@ -1,15 +1,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <!--/*@thymesVar id="title" type="java.lang.String"*/-->
-    <title th:text="${title}"></title>
+    <title th:text="'Search'"></title>
     <th:block th:insert="views/general/layout :: head"></th:block>
 </head>
 
 <body>
-<!--/*@thymesVar id="centers" type="java.util.List<com.reviewtrungtam.webapp.center.entity.Center>"*/-->
 <div class="main-container">
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
+    <div style="margin-top: 1%;">
+        <!--/*@thymesVar id="query" type="java.lang.String"*/-->
+        <div th:replace="views/center/fragments/search-form :: searchForm(${query})"></div>
+    </div>
+    <!--/*@thymesVar id="centers" type="java.util.List"*/-->
     <!--/*@thymesVar id="currentUrl" type="java.lang.String"*/-->
     <!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
     <!--/*@thymesVar id="limit" type="java.lang.Integer"*/-->

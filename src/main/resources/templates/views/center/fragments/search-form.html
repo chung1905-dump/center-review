@@ -1,0 +1,9 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<div class="form" th:fragment="searchForm(query)">
+    <form accept-charset="UTF-8" th:action="@{/search}" method="GET">
+        <input type="text" size="40" name="q" id="'search-input" th:value="${query}">
+        <input type="submit" class="submit" th:value="'Search'">
+    </form>
+</div>
+</html>

@@ -44,6 +44,11 @@ public class CenterService {
         return centerRepository.save(entity);
     }
 
+    public Page<Center> findActiveByName(String name, int limit, int page) {
+        Pageable pageRequest = PageRequest.of(page, limit);
+        return centerRepository.findAllByNameLike("%" + name + "%", pageRequest);
+    }
+
     public Center findActiveBySlug(String slug) {
         return centerRepository.findBySlugNameAndStatus(slug, Status.ACTIVE);
     }
@@ -52,9 +57,9 @@ public class CenterService {
         return centerRepository.findByIdAndStatus(id, Status.ACTIVE);
     }
 
-    public List<Center> getNewUpdatedReview(int limit, int page) {
+    public Page<Center> getNewUpdatedReview(int limit, int page) {
         Pageable pageRequest = PageRequest.of(page, limit, Sort.by("lastReviewTime").descending());
-        return centerRepository.findAll(pageRequest).toList();
+        return centerRepository.findAll(pageRequest);
     }
 
     public long countActiveCenter() {

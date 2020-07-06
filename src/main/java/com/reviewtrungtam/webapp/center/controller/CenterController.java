@@ -5,6 +5,7 @@ import com.reviewtrungtam.webapp.center.service.CenterService;
 import com.reviewtrungtam.webapp.general.exception.AppException;
 import com.reviewtrungtam.webapp.review.entity.Review;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,10 +48,10 @@ public class CenterController {
         } catch (NumberFormatException ignored) {
         }
 
-        List<Center> list = centerService.getNewUpdatedReview(limit, page);
+        Page<Center> centerPage = centerService.getNewUpdatedReview(limit, page);
         model.addAttribute("title", "Latest Updated");
-        model.addAttribute("centers", list);
-        model.addAttribute("total", centerService.countActiveCenter());
+        model.addAttribute("centers", centerPage.toList());
+        model.addAttribute("total", centerPage.getTotalPages());
         model.addAttribute("currentUrl", "/");
         model.addAttribute("limit", limit);
         model.addAttribute("page", page);

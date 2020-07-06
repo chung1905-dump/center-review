@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="centers" type="java.util.List<com.reviewtrungtam.webapp.center.entity.Center>"*/-->
+<!--/*@thymesVar id="currentUrl" type="java.lang.String"*/-->
+<!--/*@thymesVar id="page" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="limit" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="total" type="java.lang.Integer"*/-->
+<div th:fragment="centerList(centers, currentUrl, page, limit, total)">
+    <div th:replace="views/general/fragments/paginator :: paginator(${currentUrl}, ${page}, ${limit}, ${total})"></div>
+    <div>
+        <table>
+            <tbody>
+            <tr th:each="center: ${centers}">
+                <td>
+                    <a th:href="@{/c/{slug}(slug=${center.slugName})}">
+                        <img th:alt="'(' + ${center.name} + ' logo)'" th:height="'60px'"
+                             th:src="${center.logo == null} ? @{/images/default-center-logo.png} : @{/upload/logo/{img}(img=${center.logo})}">
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{/c/{slug}(slug=${center.slugName})}">
+                        <span th:text="${center.name}"></span>
+                    </a>
+                    <div th:replace="views/general/fragments/rating :: showRating(${center.point})"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:replace="views/general/fragments/paginator :: paginator(${currentUrl}, ${page}, ${limit}, ${total})"></div>
+</div>
+</html>
