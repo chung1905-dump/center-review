@@ -63,7 +63,7 @@ public class ReplyController {
             if (parentReview.isEmpty()) {
                 throw new AppException("Parent not found");
             }
-            review.setParent(parentReview.get());
+            reviewService.setParent(review, parentReview.get());
             review.setCenter(null);
             reviewService.validateNewReview(review);
             reviewService.preSave(review, 0, request.getRemoteAddr());

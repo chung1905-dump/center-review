@@ -20,7 +20,7 @@ import java.util.Set;
 
 @Service
 public class ReviewService {
-    private static final int maxLevel = 5;
+    private final int maxLevel = 5;
 
     private final ReviewRepository reviewRepository;
 
@@ -58,13 +58,12 @@ public class ReviewService {
     }
 
     public void setParent(Review review, Review parent) throws AppException {
-        int level = parent.getLevel() + 1;
-        if (level > maxLevel || !isAbleToReply(parent)) {
+        if (!isAbleToReply(parent)) {
             throw new AppException("Cannot reply to this answer");
         }
 
         review.setParent(parent);
-        review.setLevel(level);
+        review.setLevel(parent.getLevel() + 1);
     }
 
     public Set<Review> getReviews(Center center) throws AppException {
@@ -98,6 +97,10 @@ public class ReviewService {
         return review.getCenter();
     }
 
+    public boolean isAbleToReply(Review review) {
+        return review.getStatus() == Status.ACTIVE && review.getLevel() <= maxLevel;
+    }
+
     private void prepareAuthor(Review review) {
         if (userService.isAnonymous()) {
             review.setAnonymous(true);
@@ -125,10 +128,6 @@ public class ReviewService {
         }
         center.setPoint(sum / count);
         centerRepository.save(center);
-    }
-
-    private boolean isAbleToReply(Review review) {
-        return review.getStatus() != Status.ACTIVE;
     }
 
     private void setCenterEntity(Review review, int centerId) throws AppException {

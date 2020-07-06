@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
 <div class="review-detail" th:fragment="reviewDetail(review)">
-    <table>
+    <table th:id="'review-' + ${review.id}" style="border-left: 1px dashed"
+           th:onclick="'toggleDisplay(\'#review-' + ${review.id} + ' .reply-children\')'">
         <tbody>
         <tr>
             <td><img th:src="@{/images/anonymous.png}" th:alt="${review.authorName}" th:height="'30px'"></td>
@@ -36,9 +37,11 @@
         </tr>
         <tr>
             <td></td>
-            <td><a th:href="@{/reply/{id}(id=${review.id})}" th:text="'Reply'"></a></td>
+            <td><a th:if="${@reviewService.isAbleToReply(review)}" th:href="@{/reply/{id}(id=${review.id})}"
+                   th:text="'Reply'"></a></td>
         </tr>
-        <tr th:if="false">
+        <tr class="reply-children">
+            <td></td>
             <td>
                 <div th:replace="views/review/fragments/review-children :: reviewChildren(${review})"></div>
             </td>
