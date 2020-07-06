@@ -10,7 +10,7 @@
     <div th:replace="views/general/layout :: header"></div>
     <div th:replace="views/general/layout :: messages"></div>
     <div th:replace="views/review/fragments/review-detail :: reviewDetail(review=${review})"></div>
-    <div class="center-reply-form" th:insert="views/review/fragments/reply-form :: replyForm(review=${review})"></div>
+    <div th:insert="views/review/fragments/reply-form :: replyForm(review=${review})"></div>
 </div>
 </body>
 </html>

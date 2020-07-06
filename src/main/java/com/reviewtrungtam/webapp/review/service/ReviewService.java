@@ -87,6 +87,17 @@ public class ReviewService {
         }
     }
 
+    public Center getCenter(Review review) throws AppException {
+        if (review == null) {
+            throw new AppException("Error");
+        }
+        if (review.getCenter() == null) {
+            return getCenter(review.getParent());
+        }
+
+        return review.getCenter();
+    }
+
     private void prepareAuthor(Review review) {
         if (userService.isAnonymous()) {
             review.setAnonymous(true);

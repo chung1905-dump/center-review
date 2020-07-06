@@ -17,7 +17,17 @@
                        th:text="'(Employee)'">
                     </i>
                 </th:block>
-                <i th:text="${review.rating + 3}"></i>
+                <th:block th:switch="${review.rating}">
+                    <span th:case="0"></span>
+                    <span th:case="-200" th:text="'👎👎👎'">
+                    </span>
+                    <span th:case="-100" th:text="'👎'">
+                    </span>
+                    <span th:case="100" th:text="'👍'">
+                    </span>
+                    <span th:case="200" th:text="'👍👍👍'">
+                    </span>
+                </th:block>
             </td>
         </tr>
         <tr>
@@ -26,7 +36,12 @@
         </tr>
         <tr>
             <td></td>
-            <td><a href="" th:text="'Reply'"></a></td>
+            <td><a th:href="@{/reply/{id}(id=${review.id})}" th:text="'Reply'"></a></td>
+        </tr>
+        <tr th:if="false">
+            <td>
+                <div th:replace="views/review/fragments/review-children :: reviewChildren(${review})"></div>
+            </td>
         </tr>
         </tbody>
     </table>

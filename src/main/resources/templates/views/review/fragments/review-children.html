@@ -1,0 +1,12 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<!--/*@thymesVar id="review" type="com.reviewtrungtam.webapp.review.entity.Review"*/-->
+<div class="review-children" th:fragment="reviewChildren(review)">
+    <table>
+        <tbody>
+        <tr th:each="r: ${review.children}">
+            <td th:text="${r.comment}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>
