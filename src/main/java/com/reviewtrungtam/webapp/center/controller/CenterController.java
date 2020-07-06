@@ -19,14 +19,36 @@ import java.util.*;
 public class CenterController {
     private final CenterService centerService;
 
+    private final int defaultLimitPerPage = 30;
+
     @Autowired
     public CenterController(CenterService centerService) {
         this.centerService = centerService;
     }
 
+    // TODO: p=text will return 400
     @GetMapping(path = "/")
-    public String list(Model model) {
-        List<Center> list = centerService.getNewUpdatedReview(5);
+    public String list(@RequestParam(value = "p", required = false) String pageS,
+                       @RequestParam(value = "l", required = false) String limitS,
+                       Model model) {
+        int page = 0, limit = defaultLimitPerPage;
+        try {
+            page = Integer.parseInt(pageS);
+            if (page < 0) {
+                page = 0;
+            }
+        } catch (NumberFormatException ignored) {
+        }
+        try {
+            limit = Integer.parseInt(limitS);
+            if (limit < 1) {
+                limit = defaultLimitPerPage;
+            }
+        } catch (NumberFormatException ignored) {
+        }
+
+        List<Center> list = centerService.getNewUpdatedReview(limit, page);
+        model.addAttribute("title", "Latest Updated");
         model.addAttribute("centers", list);
 
         return "views/center/layout/center-list.html";

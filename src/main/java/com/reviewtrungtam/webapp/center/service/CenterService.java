@@ -52,8 +52,8 @@ public class CenterService {
         return centerRepository.findByIdAndStatus(id, Status.ACTIVE);
     }
 
-    public List<Center> getNewUpdatedReview(int limit) {
-        Pageable pageRequest = PageRequest.of(0, limit, Sort.by("lastReviewTime").descending());
+    public List<Center> getNewUpdatedReview(int limit, int page) {
+        Pageable pageRequest = PageRequest.of(page, limit, Sort.by("lastReviewTime").descending());
         return centerRepository.findAll(pageRequest).toList();
     }
 
